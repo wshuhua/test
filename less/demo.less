@@ -1,0 +1,80 @@
+// 定义变量
+@color : red; 
+@container : 1280px;
+/* 头部区域 */
+body {
+	background-color: @color;
+	color: @color;
+	width: @container;
+}
+
+
+// 导入
+// 建议放到最前面 防止被覆盖
+@import url(common.less);
+
+
+// 嵌套语法
+.father {
+	width: 100px;
+	height: 100px;
+	> .son {
+		width: 50px;
+		height: 50px;
+		.sun {
+			background-color: green;
+		}
+	}
+	.son2 {
+		width: 50px;
+		height: 50px;
+	}
+	// & 在less里面代表元素本身
+	&:hover {
+		background-color: blue;
+	}
+	&::before {
+		content: '';
+		width: 100px;
+	}
+}
+
+// minix语法
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+.ml(@num:10px) {
+	margin-left: @num;
+}
+.mr(@num:10px) {
+	margin-right: @num;
+}
+// 加了括号 css里面不会将这个类编译进去 但是可以调用
+// 不加括号 可以调用同时会进行编译
+// 可以支持传递参数
+// 并且可以设置默认值
+.border-radius(@num:10px) {
+	-webkit-border-radius:@num;
+	-moz-border-radius:@num;
+	-ms-border-radius:@num;
+	-o-border-radius:@num;
+	border-radius:@num;
+}
+.one-txt-cut{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.box {
+	.fl();
+	.one-txt-cut();
+	.border-radius(20px);
+	.ml(20px);
+	.mr(30px);
+	width: 20px + 30px;
+	height: ceil(50.5px);
+}
+
